@@ -149,5 +149,13 @@ ROW_LOOP: MOV BX, indexColA
           POP CX
           LOOP COL_LOOP
 
+EX4:
+;max value on signed 16bit: -32768 to -32767
+;(max value in B = A+A = -256)
+;127*255= 32385 (no OVF)
+;-128*255= -32640 (no OVF)
+;127*-256= -32512 (no OVF)
+;-128*-256= 32768 (OVF!!!)		  
+		  
 .EXIT
 END
