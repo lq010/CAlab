@@ -19,33 +19,68 @@ temp DB 4
 .STARTUP
 
 ex1_readFromKey:
-;init counter
+;init read cycle
 MOV CX,4
 MOV AH,1 ;instruct 21H ISR to read and save key value into AL
 XOR BX,BX
-
 read:
- PUSH CX
- MOV CX,MAXDIM ;init internal cycle
+ PUSH CX ;do a push of counter cycle each nested cycle
+ ;init readRow cycle
+ MOV CX,MAXDIM 
  XOR DI,DI
  readRow: 
   INT 21H ;wait interrupt (press key)
-  CMP AL, RETURN ;if return character jump to check20
-  JZ check20 ;control if are minimum 20
-  MOV FIRST_ROW[BX][DI],AL ;the char (1byte) is saved into AL (21H ISR) (skipped if \n)
-  INC DI  
+  ;A: if \n jump to check20
+  CMP AL, RETURN
+  JZ check20
+  ;else save the character
+    MOV FIRST_ROW[BX][DI],AL ;the char (1byte) is saved into AL (21H ISR) (skipped if \n)
+                             ;the row are saved sequentially in the memory so the starting address can be FIRST_ROW
+    INC DI
+    JMP skipCheck20 ;(must terminate skipping the other condition code)
+  check20: ; A: code
+    CMP DI,20
+    ;if number of char inserted < 20 continue input row (without update CX or DI)
+    JB readRow
+    ;else jump to next row 
+    JMP exitRow
+  skipCheck20:  
+ LOOP readRow
+ exitRow:
+ POP CX
+ ADD BX,MAXDIM ;offset for next row
+LOOP read
+
+ex2_countChar:
+;init nextRow cycle
+MOV CX,4
+XOR BX,BX
+nextRow: ;foreach row
+ PUSH CX
+ ;init nextChar cycle
+ MOV CX,MAXDIM 
+ XOR DI,DI
+ XOR AX,AX
+ nextChar: ;foreach char
+  PUSH CX
+  PUSH DI ;position of current char
+  MOV AL,FIRST_ROW[BX][DI] ;select char
+  MOV CX,MAXDIM 
+   scan:  
+    CMP AL,FIRST_ROW[BX][CX] ;compare char
+    ;if not equal try next element of array
+    JNE notFind
+    ;else increment counter
+    INC DI ;number of time founded
+    notFind:
+   LOOP scan 
+     
  LOOP readRow
  exitRow:
  POP CX
  ADD BX,MAXDIM
 LOOP read
-
-check20:
-CMP DI,20 ;if there are 20 chars continue to next row
-JB readRow ;if <20 continue input
-JMP exitRow
-
-;ex2_countChar: 
+ 
 ; MOV CX,MAXDIM
 ; XOR DI,DI
 ; XOR BX,BX
@@ -57,7 +92,6 @@ JMP exitRow
 ; INC DI
 ; LOOP nextChar
 
-exit_label:
 .EXIT
 
 ;is char already 
