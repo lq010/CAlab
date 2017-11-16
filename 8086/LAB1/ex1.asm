@@ -1,5 +1,5 @@
 ; Computer Architectures (02LSEOV)
-; Lab n.1
+; 8086 - Lab n.1
 ; Simone Iammarino 15/11/2017
 
 DIMS EQU 9   ;define constant
