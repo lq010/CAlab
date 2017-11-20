@@ -2,7 +2,7 @@
 ; 8086 - Lab n.2
 ; Simone Iammarino 06/11/2017
 
-MAXDIM EQU 10
+MAXDIM EQU 10  ;must be multiple of 2!
 MINDIM EQU 5
 RETURN EQU 0dh ;binary value of return character \n
 
@@ -65,9 +65,9 @@ ex2_countChar:
 MOV CX,4
 XOR BX,BX
 XOR SI,SI
-PUSH CX
 ;for(CX=4,CX=0,CX--)
 row_loop_2:
+  PUSH CX
   MOV CX,MAXDIM
   ;for(CX=MAXDIM,CX=0,CX--)
   char_loop_2:
@@ -90,6 +90,41 @@ ADD BX,MAXDIM ;next row
 POP CX
 LOOP row_loop_2
 ;end for (row_loop_2)
+
+;print characters that appear MAXDIM/2 times
+MOV CX,4
+XOR BX,BX
+XOR SI,SI
+XOR AX,AX
+XOR DX,DX
+MOV AH,2 ;print on int 21h enabled
+;for(CX=4,CX=0,CX--)
+half_max_time:
+  ;while CHARLIST[BX][SI]=0: means no other characters
+  charlist_scan:
+    ;if end charlist: next charlist
+      MOV DL,CHARLIST1[BX][SI]
+      CMP DL,0
+      JE skip_scan
+    ;else: scan charlist
+      ;if character=MAXDIM/2: print
+        CMP DL,MAXDIM/2
+        JE print_char
+      ;else: next character
+        ADD SI,2
+        JMP charlist_scan
+      print_char:
+      INC SI
+      MOV DL,CHARLIST1[BX][SI] ;selects character
+      INT 21H
+      INC SI
+  JMP charlist_scan
+  ;end while (charlist_scan)
+  skip_scan:
+  XOR SI,SI
+  ADD BX, MAXDIM*2 ;next charlist
+LOOP half_max_time
+;end for (half_max_time)
 
 .EXIT
 
