@@ -1,0 +1,2 @@
+Dependencies for Project 'ARM_template', Target 'Target 1': (DO NOT MODIFY !)
+F (.\ARM_template.s)(0x5A169D0E)(--cpu ARM7TDMI --pd "__EVAL SETA 1" -g --apcs=interwork -I "C:\Keil\ARM\INC" -I "C:\Keil\ARM\INC\Philips" --list "ARM_template.lst" --xref -o "ARM_template.o" --depend "ARM_template.d")

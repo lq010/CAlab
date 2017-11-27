@@ -1,0 +1,179 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Paolo\Documents\My Courses\ARCHITETTURE_ELABORAZIONE\2017\ARM\simple\ARM_template.uvproj
+Project File Date:  12/11/2012
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(93): warning: A1608W: MOV pc,<rn> instruction used, but BX <rn> is preferred
+ARM_template.s:    93 000000d8     MOV PC, LR
+ARM_template.s: 0 Errors, 1 Warning
+linking...
+Program Size: Code=236 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(84): error: A1510E: Immediate 0x00001081 cannot be represented by 0-255 and a rotation
+ARM_template.s:    84 000000cc     mov r0, #4225  
+ARM_template.s: 1 Error, 0 Warnings
+Target not created
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(91): warning: A1608W: MOV pc,<rn> instruction used, but BX <rn> is preferred
+ARM_template.s:    91 000000d4     MOV PC, LR
+ARM_template.s: 0 Errors, 1 Warning
+linking...
+Program Size: Code=232 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(91): warning: A1608W: MOV pc,<rn> instruction used, but BX <rn> is preferred
+ARM_template.s:    91 000000d4     MOV PC, LR
+ARM_template.s: 0 Errors, 1 Warning
+linking...
+Program Size: Code=232 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(92): warning: A1608W: MOV pc,<rn> instruction used, but BX <rn> is preferred
+ARM_template.s:    92 000000d8     MOV PC, LR
+ARM_template.s: 0 Errors, 1 Warning
+linking...
+Program Size: Code=236 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(96): warning: A1608W: MOV pc,<rn> instruction used, but BX <rn> is preferred
+ARM_template.s:    96 000000e0     MOV PC, LR
+ARM_template.s: 0 Errors, 1 Warning
+linking...
+Program Size: Code=248 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(98): warning: A1608W: MOV pc,<rn> instruction used, but BX <rn> is preferred
+ARM_template.s:    98 000000e8     MOV PC, LR
+ARM_template.s: 0 Errors, 1 Warning
+linking...
+Program Size: Code=256 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(99): warning: A1608W: MOV pc,<rn> instruction used, but BX <rn> is preferred
+ARM_template.s:    99 000000ec     MOV PC, LR
+ARM_template.s: 0 Errors, 1 Warning
+linking...
+Program Size: Code=260 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(85): error: A1510E: Immediate 0x11223344 cannot be represented by 0-255 and a rotation
+ARM_template.s:    85 000000d0     mov r2, #0x11223344
+ARM_template.s: 1 Error, 0 Warnings
+Target not created
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(101): warning: A1608W: MOV pc,<rn> instruction used, but BX <rn> is preferred
+ARM_template.s:   101 000000f0     MOV PC, LR
+ARM_template.s: 0 Errors, 1 Warning
+linking...
+Program Size: Code=268 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(101): warning: A1608W: MOV pc,<rn> instruction used, but BX <rn> is preferred
+ARM_template.s:   101 000000f4     MOV PC, LR
+ARM_template.s: 0 Errors, 1 Warning
+linking...
+Program Size: Code=276 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(107): warning: A1608W: MOV pc,<rn> instruction used, but BX <rn> is preferred
+ARM_template.s:   107 00000100     MOV PC, LR
+ARM_template.s: 0 Errors, 1 Warning
+linking...
+Program Size: Code=288 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(103): warning: A1608W: MOV pc,<rn> instruction used, but BX <rn> is preferred
+ARM_template.s:   103 00000100     MOV PC, LR
+ARM_template.s: 0 Errors, 1 Warning
+linking...
+Program Size: Code=288 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+linking...
+Program Size: Code=296 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+linking...
+Program Size: Code=296 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+linking...
+Program Size: Code=312 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+linking...
+Program Size: Code=312 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(98): error: A1517E: Unexpected operator equal to or equivalent to =
+ARM_template.s:    98 000000fc     bic r1, =0x00001000
+ARM_template.s:                             ^
+ARM_template.s: 1 Error, 0 Warnings
+Target not created
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(98): error: A1517E: Unexpected operator equal to or equivalent to =
+ARM_template.s:    98 000000fc     bic r1, =0x00001000
+ARM_template.s:                             ^
+ARM_template.s: 1 Error, 0 Warnings
+Target not created
+Build target 'Target 1'
+assembling ARM_template.s...
+linking...
+Program Size: Code=324 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+linking...
+Program Size: Code=328 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+linking...
+Program Size: Code=328 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+ARM_template.s(111): error: A1510E: Immediate 0x00001081 cannot be represented by 0-255 and a rotation
+ARM_template.s:   111 0000011c     mov r1, #4225
+ARM_template.s: 1 Error, 0 Warnings
+Target not created
+Build target 'Target 1'
+assembling ARM_template.s...
+linking...
+Program Size: Code=328 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+linking...
+Program Size: Code=332 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling ARM_template.s...
+linking...
+Program Size: Code=336 RO-data=0 RW-data=0 ZI-data=17408  
+"ARM_template.axf" - 0 Error(s), 0 Warning(s).
