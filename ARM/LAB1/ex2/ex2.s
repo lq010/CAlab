@@ -21,65 +21,21 @@ ENTRY
 	MOVHI R1, R2
 	MOVHI R2, R3
 
-	MOV r3, r0
-	MOV r7,#0
-	MOV r6,#0
+	;checking if R1 and R2 are multiple of R0 by multiple addition
+	MOV r6,#0 ;reset counter
 loop1
-	ADD r4,r0,r3
-    MOV r0,r4	
-	CMP r4,r1 ;compare with second bigger element
-	ADD r6,r7,#1 ;increment counter
-	BLO loop1 
-	MOVNE r4,#0
+	ADD r4,r4,r0	
+	CMP r4,r1 
+	ADDLS r6,r6,#1 ;increment counter (how many times R0 is in R1)
+	BLO loop1 ;exit loop if R4 > R1 (not divisible)
+	MOVEQ r4,r6 ;save the quotient if divisible
 		
-	MOV r7,#0 ;reset counter
 	MOV r6,#0
 loop2
-	ADD r5,r0,r3
-	MOV r0,r5
-	CMP r5,r2 ;compare with first bigger element
-	ADD r6,r7,#1 ;increment counter
-	BLO loop2
-	MOVNE r5,#0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-;reset_handler
-	;MOV R0, #200
-	;;MOV R1, #1001 ; IT GIVES AN ERROR
-	;LDR R1, =1001
-	;; R2 = [R0 - R1]
-
-	;CMP R0, R1
-	;BLO islower
-	;sub r2,r0,r1
-	;B next
-	
-;islower
-	;sub r2,r1,r0
-	
-;next
-	;B reset_handler
-	
+	ADD r5,r5,r0	
+	CMP r5,r2 
+	ADDLS r6,r6,#1 
+	BLO loop2 
+	MOVEQ r5,r6
 	
 	END

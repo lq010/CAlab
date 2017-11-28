@@ -1,2 +1,2 @@
 Dependencies for Project 'ex2', Target 'Target 1': (DO NOT MODIFY !)
-F (.\ex2.s)(0x5A1865B8)(--cpu ARM7TDMI --pd "__EVAL SETA 1" -g --apcs=interwork -I "C:\Keil\ARM\INC" -I "C:\Keil\ARM\INC\Philips" --list "ex2.lst" --xref -o "ex2.o" --depend "ex2.d")
+F (.\ex2.s)(0x5A1DE742)(--cpu ARM7TDMI --pd "__EVAL SETA 1" -g --apcs=interwork -I "C:\Keil\ARM\INC" -I "C:\Keil\ARM\INC\Philips" --list "ex2.lst" --xref -o "ex2.o" --depend "ex2.d")

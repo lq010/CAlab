@@ -156,7 +156,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>ARM_template.s</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\ARM_template\96</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
@@ -171,7 +171,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>ARM_template.s</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\ARM_template\83</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
@@ -186,7 +186,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>ARM_template.s</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\ARM_template\111</Expression>
         </Bp>
       </Breakpoint>
       <MemoryWindow1>
@@ -199,7 +199,7 @@
       <DebugFlag>
         <trace>0</trace>
         <periodic>1</periodic>
-        <aLwin>0</aLwin>
+        <aLwin>1</aLwin>
         <aCover>0</aCover>
         <aSer1>0</aSer1>
         <aSer2>0</aSer2>
@@ -238,10 +238,10 @@
       <FileType>2</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>17</ColumnNumber>
+      <ColumnNumber>18</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>108</TopLine>
-      <CurrentLine>112</CurrentLine>
+      <TopLine>61</TopLine>
+      <CurrentLine>63</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\ARM_template.s</PathWithFileName>
       <FilenameWithoutPath>ARM_template.s</FilenameWithoutPath>
@@ -257,9 +257,9 @@
       <Documents>
         <Doc>
           <Name>.\ARM_template.s</Name>
-          <ColumnNumber>52</ColumnNumber>
-          <TopLine>60</TopLine>
-          <CurrentLine>61</CurrentLine>
+          <ColumnNumber>18</ColumnNumber>
+          <TopLine>61</TopLine>
+          <CurrentLine>63</CurrentLine>
         </Doc>
       </Documents>
     </MDIGroup>

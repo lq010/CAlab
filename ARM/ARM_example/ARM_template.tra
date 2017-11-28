@@ -9,7 +9,7 @@
 ### ADS-LD Output File: 'ARM_template.axf'
 ### ADS-LD Command File: 'ARM_template.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile 'ARM_template.lnp', Handle=0x000003D4
+### Creating CmdFile 'ARM_template.lnp', Handle=0x000005A4
 ### Writing '.lnp' file
 ### ADS-LD Command file 'ARM_template.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.

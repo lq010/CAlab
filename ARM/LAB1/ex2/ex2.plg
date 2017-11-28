@@ -9,27 +9,16 @@ Project File Date:  11/24/2017
 <h2>Output:</h2>
 Build target 'Target 1'
 assembling ex2.s...
-ex2.s(29): error: A1163E: Unknown opcode MO , expecting opcode or Macro
-ex2.s:    29 0000004c     MO V r0,r4 
-ex2.s:                    ^
-ex2.s: 1 Error, 0 Warnings
-Target not created
-Build target 'Target 1'
-assembling ex2.s...
-ex2.s(29): error: A1647E: Bad register name symbol, expected Integer register
-ex2.s:    29 0000004c     MOV V r0,r4 
-ex2.s:                        ^
-ex2.s: 1 Error, 0 Warnings
-Target not created
-Build target 'Target 1'
-assembling ex2.s...
-ex2.s(29): error: A1647E: Bad register name symbol, expected Integer register
-ex2.s:    29 0000004c     MOV V r0,r4 
-ex2.s:                        ^
-ex2.s: 1 Error, 0 Warnings
-Target not created
+linking...
+Program Size: Code=112 RO-data=0 RW-data=0 ZI-data=0  
+"ex2.axf" - 0 Error(s), 0 Warning(s).
 Build target 'Target 1'
 assembling ex2.s...
 linking...
-Program Size: Code=128 RO-data=0 RW-data=0 ZI-data=0  
+Program Size: Code=108 RO-data=0 RW-data=0 ZI-data=0  
+"ex2.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling ex2.s...
+linking...
+Program Size: Code=108 RO-data=0 RW-data=0 ZI-data=0  
 "ex2.axf" - 0 Error(s), 0 Warning(s).
