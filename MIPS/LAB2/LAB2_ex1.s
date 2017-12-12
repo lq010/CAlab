@@ -14,10 +14,12 @@ scan_x:
 	daddui r5,r0,0 ;reset "ones counter"
 	daddui r4,r0,0 ;reset "scan byte" cycle counter 
 
-	;while(r1<7) : scans X[r1] byte and compute parity bit
 	lb r2,X(r1)
+  daddu r7,r0,r2    ;temp copy
+  ;while(r1<7) : scans X[r1] byte and compute parity bit
 	scan_byte:
-		andi r3,r2,1 	;save LSB into r3
+		andi r3,r7,1 	  ;save LSB into r3
+    dsrl r7,r7,1   
 		daddu r5,r3,r0 	;update "ones counter"
 		daddui r4,r4,1 	;update cycle counter
 	bne r4,r10,scan_byte
