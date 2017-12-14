@@ -1,0 +1,15 @@
+-----------------
+Simulation report
+(from stats.txt)
+-----------------
+
+CPU TYPE																	#instSimulated   #instrCommitted   #CPUclockcycle   #CPI(clock per instruction)
+
+TimingSimpleCPU                                     5489              5489           714128                       130.101
+(initial memory model interaction)
+
+MinorCPU                                            5502              5502            63393                        11.521
+(in order pipeline)
+
+DerivO3CPU                                          5286              5488            37549                         7.103
+(superscalar processor)

@@ -1,0 +1,14 @@
+#!/bin/bash
+#compile command
+/opt/alphaev67-unknown-linux-gnu/bin/alphaev67-unknown-linux-gnu-gcc -static -o hello_world hello_world.c
+/opt/gem5/build/ALPHA/gem5.opt /opt/gem5/configs/example/se.py -c hello_world
+
+#help
+/opt/gem5/build/ALPHA/gem5.opt /opt/gem5/configs/example/se.py -h
+/opt/gem5/build/ALPHA/gem5.opt /opt/gem5/configs/example/se.py --list-cpu-types
+
+#how to run c file with different processor type
+/opt/gem5/build/ALPHA/gem5.opt /opt/gem5/configs/example/se.py --cpu-type=timing -c hello_world
+/opt/gem5/build/ALPHA/gem5.opt /opt/gem5/configs/example/se.py --cpu-type=minor --caches -c hello_world
+/opt/gem5/build/ALPHA/gem5.opt /opt/gem5/configs/example/se.py --cpu-type=detailed --caches -c hello_world
+

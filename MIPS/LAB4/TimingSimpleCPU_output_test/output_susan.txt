@@ -1,0 +1,73 @@
+gem5 Simulator System.  http://gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 compiled Sep 30 2016 17:57:37
+gem5 started Dec 14 2017 18:37:24
+gem5 executing on labinf15, pid 4556
+command line: /opt/gem5/build/ALPHA/gem5.opt /opt/gem5/configs/example/se.py --cpu-type=timing -c susan
+
+Global frequency set at 1000000000000 ticks per second
+**** REAL SIMULATION ****
+info: Entering event queue @ 0.  Starting simulation...
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+info: Increasing stack size by one page.
+Usage: susan <in.pgm> <out.pgm> [options]
+
+-s : Smoothing mode (default)
+-e : Edges mode
+-c : Corners mode
+
+See source code for more information about setting the thresholds
+-t <thresh> : Brightness threshold, all modes (default=20)
+-d <thresh> : Distance threshold, smoothing mode, (default=4) (use next option instead for flat 3x3 mask)
+-3 : Use flat 3x3 mask, edges or smoothing mode
+-n : No post-processing on the binary edge map (runs much faster); edges mode
+-q : Use faster (and usually stabler) corner mode; edge-like corner suppression not carried out; corners mode
+-b : Mark corners/edges with single black points instead of black with white border; corners or edges mode
+-p : Output initial enhancement image only; corners or edges mode (default is edges mode)
+
+SUSAN Version 2l (C) 1995-1997 Stephen Smith, DRA UK. steve@fmrib.ox.ac.uk
+Exiting @ tick 1483642000 because target called exit()

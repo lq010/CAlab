@@ -31,13 +31,16 @@ loop:
 		s.d f6, V6(r8)    ;          FDsssssEssssMW 24 (E structural hzs, wait f6 data hzd, wait M (structural hzd))
 		s.d f7, V7(r8)    ;           FsssssDssssEMW 25 (structural hzd in M stage with previous add.d)
 		daddui r8, r8, 8  ;                 FssssDEMW 26 (various structural hzd)
-		bne r8, r9, loop	;                      FDEMW 27      
-HALT                  ; loop total clock cycle: (27-7)*10=200
-                      ; total clock cycle: 170+6 = 206
+		bne r8, r9, loop  ;                      FsDEMW 28
+HALT                                           F---- 29
+ 
+                      ; loop total clock cycle: (29-6)*10=230
+                      ; total clock cycle: 170+6 = 236
                       ; #instructions: 2+(12*10)=122
-                      ; CPI(Cycle per Instruction): 206/122 = 1.6885
+                      ; CPI(Cycle per Instruction): 236/122 = 1.9344
                       
 ;NOTE: to more accurate evaluation, we need to take into account that
 ;      in the first cycle, the first instructions can be executed
 ;      with a different schedule w.r.t to the next time after the branch! 
-;      (depends on the dependences between the last and first instruction of the cycle)   
+;      (depends on the dependences between the last and first instruction of the cycle)
+;			 !solution: unroll two time the loop to see the difference between the first iteration and the others 
