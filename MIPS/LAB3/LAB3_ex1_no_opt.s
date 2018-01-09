@@ -8,7 +8,7 @@ V5: .space 80
 V6: .space 80
 V7: .space 80
 
-.code
+.text
 
 ;NO OPTIMIZED code
 ;used for clock cycle calulation 
@@ -32,7 +32,7 @@ loop:
 		s.d f7, V7(r8)    ;           FsssssDssssEMW 25 (structural hzd in M stage with previous add.d)
 		daddui r8, r8, 8  ;                 FssssDEMW 26 (various structural hzd)
 		bne r8, r9, loop  ;                      FsDEMW 28
-HALT                                           F---- 29
+HALT                  ;                        F---- 29
  
                       ; loop total clock cycle: (29-6)*10=230
                       ; total clock cycle: 170+6 = 236
