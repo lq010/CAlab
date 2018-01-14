@@ -184,10 +184,10 @@
       <FileType>2</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>45</ColumnNumber>
+      <ColumnNumber>26</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
-      <CurrentLine>37</CurrentLine>
+      <TopLine>17</TopLine>
+      <CurrentLine>41</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\ex2.s</PathWithFileName>
       <FilenameWithoutPath>ex2.s</FilenameWithoutPath>
@@ -203,9 +203,9 @@
       <Documents>
         <Doc>
           <Name>.\ex2.s</Name>
-          <ColumnNumber>45</ColumnNumber>
-          <TopLine>1</TopLine>
-          <CurrentLine>37</CurrentLine>
+          <ColumnNumber>26</ColumnNumber>
+          <TopLine>17</TopLine>
+          <CurrentLine>41</CurrentLine>
         </Doc>
       </Documents>
     </MDIGroup>

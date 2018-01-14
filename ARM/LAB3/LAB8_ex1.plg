@@ -1,0 +1,57 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\Politecnico\Specialistica\Computer Architecture\Laboratories\CAlab\ARM\LAB3\LAB8_ex1.uvproj
+Project File Date:  01/14/2018
+
+<h2>Output:</h2>
+assembling LAB8_ex1.s...
+LAB8_ex1.s(151): warning: A1865W: '#' not seen before constant expression
+LAB8_ex1.s:   151 00000104   AND r3,r3,0x80000000
+LAB8_ex1.s:                            ^
+LAB8_ex1.s(152): warning: A1865W: '#' not seen before constant expression
+LAB8_ex1.s:   152 00000108   AND r4,r4,0x80000000
+LAB8_ex1.s:                            ^
+LAB8_ex1.s(153): warning: A1865W: '#' not seen before constant expression
+LAB8_ex1.s:   153 0000010c   AND r8,r5,0x80000000
+LAB8_ex1.s:                            ^
+LAB8_ex1.s(160): warning: A1865W: '#' not seen before constant expression
+LAB8_ex1.s:   160 00000120   CMP r8,0x80000000
+LAB8_ex1.s:                         ^
+LAB8_ex1.s(168): warning: A1865W: '#' not seen before constant expression
+LAB8_ex1.s:   168 00000134   CMP r8,0x60000000
+LAB8_ex1.s:                         ^
+LAB8_ex1.s: 0 Errors, 5 Warnings
+LAB8_ex1.s - 0 Error(s), 5 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: Code=368 RO-data=0 RW-data=0 ZI-data=1792  
+"LAB8_ex1.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling LAB8_ex1.s...
+LAB8_ex1.s(151): warning: A1865W: '#' not seen before constant expression
+LAB8_ex1.s:   151 00000104   AND r3,r3,0x80000000
+LAB8_ex1.s:                            ^
+LAB8_ex1.s(152): warning: A1865W: '#' not seen before constant expression
+LAB8_ex1.s:   152 00000108   AND r4,r4,0x80000000
+LAB8_ex1.s:                            ^
+LAB8_ex1.s(153): warning: A1865W: '#' not seen before constant expression
+LAB8_ex1.s:   153 0000010c   AND r8,r5,0x80000000
+LAB8_ex1.s:                            ^
+LAB8_ex1.s(160): warning: A1865W: '#' not seen before constant expression
+LAB8_ex1.s:   160 00000120   CMP r8,0x80000000
+LAB8_ex1.s:                         ^
+LAB8_ex1.s(168): warning: A1865W: '#' not seen before constant expression
+LAB8_ex1.s:   168 00000134   CMP r8,0x60000000
+LAB8_ex1.s:                         ^
+LAB8_ex1.s: 0 Errors, 5 Warnings
+linking...
+Program Size: Code=368 RO-data=0 RW-data=0 ZI-data=1792  
+"LAB8_ex1.axf" - 0 Error(s), 5 Warning(s).
+Build target 'Target 1'
+assembling LAB8_ex1.s...
+linking...
+Program Size: Code=368 RO-data=0 RW-data=0 ZI-data=1792  
+"LAB8_ex1.axf" - 0 Error(s), 0 Warning(s).
