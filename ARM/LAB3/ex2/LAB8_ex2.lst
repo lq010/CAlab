@@ -1,0 +1,732 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;/******************************************************
+                       ***********************/
+    2 00000000         ;/* STARTUP.S: Startup file for Philips LPC2000         
+                                             */
+    3 00000000         ;/******************************************************
+                       ***********************/
+    4 00000000         ;/* <<< Use Configuration Wizard in Context Menu >>>    
+                                             */ 
+    5 00000000         ;/******************************************************
+                       ***********************/
+    6 00000000         ;/* This file is part of the uVision/ARM development too
+                       ls.                   */
+    7 00000000         ;/* Copyright (c) 2005-2007 Keil Software. All rights re
+                       served.               */
+    8 00000000         ;/* This software may only be used under the terms of a 
+                       valid, current,       */
+    9 00000000         ;/* end user licence from KEIL for a compatible version 
+                       of KEIL software      */
+   10 00000000         ;/* development tools. Nothing else gives you the right 
+                       to use this software. */
+   11 00000000         ;/******************************************************
+                       ***********************/
+   12 00000000         
+   13 00000000         ; Standard definitions of Mode bits and Interrupt (I & F
+                       ) flags in PSRs
+   14 00000000         
+   15 00000000 00000010 
+                       Mode_USR
+                               EQU              0x10
+   16 00000000 00000011 
+                       Mode_FIQ
+                               EQU              0x11
+   17 00000000 00000012 
+                       Mode_IRQ
+                               EQU              0x12
+   18 00000000 00000013 
+                       Mode_SVC
+                               EQU              0x13
+   19 00000000 00000017 
+                       Mode_ABT
+                               EQU              0x17
+   20 00000000 0000001B 
+                       Mode_UND
+                               EQU              0x1B
+   21 00000000 0000001F 
+                       Mode_SYS
+                               EQU              0x1F
+   22 00000000         
+   23 00000000 00000080 
+                       I_Bit   EQU              0x80        ; when I bit is set
+                                                            , IRQ is disabled
+   24 00000000 00000040 
+                       F_Bit   EQU              0x40        ; when F bit is set
+                                                            , FIQ is disabled
+   25 00000000         
+   26 00000000 00000080 
+                       UND_Stack_Size
+                               EQU              0x00000080
+   27 00000000 00000080 
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+                       SVC_Stack_Size
+                               EQU              0x00000080
+   28 00000000 00000000 
+                       ABT_Stack_Size
+                               EQU              0x00000000
+   29 00000000 00000000 
+                       FIQ_Stack_Size
+                               EQU              0x00000000
+   30 00000000 00000080 
+                       IRQ_Stack_Size
+                               EQU              0x00000080
+   31 00000000 00000400 
+                       USR_Stack_Size
+                               EQU              0x00000400
+   32 00000000 00000180 
+                       ISR_Stack_Size
+                               EQU              (UND_Stack_Size + SVC_Stack_Siz
+e + ABT_Stack_Size + FIQ_Stack_Size + IRQ_Stack_Size)
+   33 00000000         
+   34 00000000         ;Stack Area
+   35 00000000                 AREA             STACK, NOINIT, READWRITE, ALIGN
+=3
+   36 00000000         Stack_Mem
+                               SPACE            USR_Stack_Size
+   37 00000400         __initial_sp
+                               SPACE            ISR_Stack_Size
+   38 00000580         Stack_Top
+   39 00000580                 PRESERVE8                    ;preserve 8byte ali
+                                                            gment of the stack
+   40 00000580         
+   41 00000580         ;Heap Area
+   42 00000580 00000100 
+                       Heap_Size
+                               EQU              0x00000100
+   43 00000580                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
+3
+   44 00000000         Heap_Mem
+                               SPACE            Heap_Size
+   45 00000100         
+   46 00000100         ; Code Area (Entry point)
+   47 00000100         
+   48 00000100                 AREA             RESET, CODE, READONLY
+   49 00000000                 ARM
+   50 00000000         
+   51 00000000         ; Exception vector table handles every type of exception
+                       s.
+   52 00000000         ;  It is mapped to Address 0.
+   53 00000000         ;  Absolute addressing mode must be used.
+   54 00000000         ;  Dummy Handlers are implemented as infinite loops whic
+                       h can be modified.
+   55 00000000         
+   56 00000000         ;this vector table is fixed, implemented in hardware, ea
+                       ch interrupt know how to jump in this table!
+   57 00000000 E59FF018 
+                       Vectors LDR              PC, Reset_Addr ; reset - first 
+                                                            instruction execute
+                                                            d!        
+   58 00000004 E59FF018        LDR              PC, Undef_Addr ; undefined inst
+                                                            ruction - load a no
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+                                                            n implemented instr
+                                                            uction
+   59 00000008 E59FF018        LDR              PC, SWI_Addr ; software interru
+                                                            pt
+   60 0000000C E59FF018        LDR              PC, PAbt_Addr ; prefetch abort 
+                                                            - the programm coun
+                                                            ter try to load an 
+                                                            instruction in an i
+                                                            nvalid memory locat
+                                                            ion
+   61 00000010 E59FF018        LDR              PC, DAbt_Addr ; data abort - tr
+                                                            y to access a memor
+                                                            y area for which we
+                                                             don't have privile
+                                                            ge or does not exis
+                                                            t
+   62 00000014 E1A00000        NOP                          ; reserved vector 
+   63 00000018 E59FF018        LDR              PC, IRQ_Addr ; IRQ
+   64 0000001C E59FF018        LDR              PC, FIQ_Addr ; FIQ
+   65 00000020         
+   66 00000020 00000000 
+                       Reset_Addr
+                               DCD              Reset_Handler
+   67 00000024 00000000 
+                       Undef_Addr
+                               DCD              Undef_Handler
+   68 00000028 00000000 
+                       SWI_Addr
+                               DCD              SWI_Handler
+   69 0000002C 00000000 
+                       PAbt_Addr
+                               DCD              PAbt_Handler
+   70 00000030 00000000 
+                       DAbt_Addr
+                               DCD              DAbt_Handler
+   71 00000034 00000000        DCD              0           ; Reserved Address 
+                                                            
+   72 00000038 00000000 
+                       IRQ_Addr
+                               DCD              IRQ_Handler
+   73 0000003C 00000000 
+                       FIQ_Addr
+                               DCD              FIQ_Handler
+   74 00000040         
+   75 00000040 EAFFFFFE 
+                       SWI_Handler
+                               B                SWI_Handler
+   76 00000044 EAFFFFFE 
+                       PAbt_Handler
+                               B                PAbt_Handler
+   77 00000048 EAFFFFFE 
+                       DAbt_Handler
+                               B                DAbt_Handler
+   78 0000004C EAFFFFFE 
+                       IRQ_Handler
+                               B                IRQ_Handler
+   79 00000050 EAFFFFFE 
+                       FIQ_Handler
+                               B                FIQ_Handler
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+   80 00000054         
+   81 00000054         
+   82 00000054         ;Undefined Instructions handler
+   83 00000054         Undef_Handler
+   84 00000054 E92D4FFF        STMFD            sp!,{r0-r11, lr} ;push register
+                                                            s and return addres
+                                                            s (link register)
+   85 00000058         
+   86 00000058 E51E0004        LDR              r0,[lr,#-4] ;save into r0 calle
+                                                            r instruction code
+   87 0000005C E20016FF        BIC              r1,r0,#0xf00fffff ;select user 
+                                                            defined instruction
+                                                             type field (in our
+                                                             case should be 0x7
+                                                            F)
+   88 00000060 E351067F        CMP              r1,#0x07f00000 ;skip if is not 
+                                                            a division instruct
+                                                            ion
+   89 00000064 1A000008        BNE              no_division
+   90 00000068 E2002CFF        BIC              r2,r0,#0xffff00ff ;store in r2 
+                                                            immediate field
+   91 0000006C E1A02422        LSR              r2,r2,#8    ;obtain correct imm
+                                                            ediate value (shift
+                                                             8bit)
+   92 00000070 E200300F        BIC              r3,r0,#0xfffffff0 ;store in r3 
+                                                            the number of sourc
+                                                            e register
+   93 00000074 E79D4103        LDR              r4,[sp, r3, LSL #2] ;load from 
+                                                            stack the value in 
+                                                            the source register
+                                                            . Remember that is 
+                                                            codified as 0xF? an
+                                                            d we select ?, with
+                                                             LSL we multiply by
+                                                             4 this value becau
+                                                            se the register are
+                                                             on 4byte into stac
+                                                            k.
+   94 00000078         
+   95 00000078 E3A0C000        LDR              r12,=0
+   96 0000007C         division_loop
+   97 0000007C E1540002        CMP              r4,r2
+   98 00000080 20444002        SUBHS            r4,r4,r2    ;subtract if higher
+                                                             of the same
+   99 00000084 228CC001        ADDHS            r12,r12,#1
+  100 00000088 2AFFFFFB        BHS              division_loop
+  101 0000008C         
+  102 0000008C         no_division
+  103 0000008C E8FD8FFF        LDMFD            sp!,{r0-r11, pc}^ ;pop instruct
+                                                            ion (notice pushed 
+                                                            lr now is loaded fr
+                                                            om the stack to pc)
+                                                            
+  104 00000090         
+  105 00000090         Reset_Handler
+  106 00000090         ; Setup Stack for each mode
+  107 00000090 E59F0050        LDR              R0, =Stack_Top ;
+  108 00000094         
+  109 00000094 E321F0DB        MSR              CPSR_c, #Mode_UND:OR:I_Bit:OR:F
+
+
+
+ARM Macro Assembler    Page 5 
+
+
+_Bit 
+                                                            ;Undefined Instruct
+                                                            ion mode
+  110 00000098 E1A0D000        MOV              SP, R0
+  111 0000009C E2400080        SUB              R0, R0, #UND_Stack_Size
+  112 000000A0         
+  113 000000A0 E321F0D7        MSR              CPSR_c, #Mode_ABT:OR:I_Bit:OR:F
+_Bit 
+                                                            ;Abort mode
+  114 000000A4 E1A0D000        MOV              SP, R0
+  115 000000A8 E2400000        SUB              R0, R0, #ABT_Stack_Size
+  116 000000AC         
+  117 000000AC E321F0D1        MSR              CPSR_c, #Mode_FIQ:OR:I_Bit:OR:F
+_Bit 
+                                                            ;FIQ mode
+  118 000000B0 E1A0D000        MOV              SP, R0
+  119 000000B4 E2400000        SUB              R0, R0, #FIQ_Stack_Size
+  120 000000B8         
+  121 000000B8 E321F0D2        MSR              CPSR_c, #Mode_IRQ:OR:I_Bit:OR:F
+_Bit 
+                                                            ;IRQ mode
+  122 000000BC E1A0D000        MOV              SP, R0
+  123 000000C0 E2400080        SUB              R0, R0, #IRQ_Stack_Size
+  124 000000C4         
+  125 000000C4 E321F0D3        MSR              CPSR_c, #Mode_SVC:OR:I_Bit:OR:F
+_Bit 
+                                                            ;Supervisor mode
+  126 000000C8 E1A0D000        MOV              SP, R0
+  127 000000CC E2400080        SUB              R0, R0, #SVC_Stack_Size
+  128 000000D0         
+  129 000000D0 E321F010        MSR              CPSR_c, #Mode_USR ;User mode
+  130 000000D4 E1A0D000        MOV              SP, R0
+  131 000000D8 E24DAB01        SUB              SL, SP, #USR_Stack_Size
+  132 000000DC         
+  133 000000DC         ; MAIN PROGRAMM:
+  134 000000DC         
+  135 000000DC E3A06010        LDR              r6,=16
+  136 000000E0 E7F005F6 
+                       DIVR6BY5
+                               DCD              0xE7F005F6  ;generates undefine
+                                                            d exception
+  137 000000E4         
+  138 000000E4         do_nothing
+  139 000000E4 EAFFFFFE        B                do_nothing
+  140 000000E8         
+  141 000000E8                 END
+              00000000 
+Command Line: --debug --xref --apcs=interwork --depend=LAB8_ex2.d -oLAB8_ex2.o 
+-IC:\Keil\ARM\INC -IC:\Keil\ARM\INC\Philips --predefine="__EVAL SETA 1" --list=
+LAB8_ex2.lst LAB8_ex2.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+STACK 00000000
+
+Symbol: STACK
+   Definitions
+      At line 35 in file LAB8_ex2.s
+   Uses
+      None
+Comment: STACK unused
+Stack_Mem 00000000
+
+Symbol: Stack_Mem
+   Definitions
+      At line 36 in file LAB8_ex2.s
+   Uses
+      None
+Comment: Stack_Mem unused
+Stack_Top 00000580
+
+Symbol: Stack_Top
+   Definitions
+      At line 38 in file LAB8_ex2.s
+   Uses
+      At line 107 in file LAB8_ex2.s
+Comment: Stack_Top used once
+__initial_sp 00000400
+
+Symbol: __initial_sp
+   Definitions
+      At line 37 in file LAB8_ex2.s
+   Uses
+      None
+Comment: __initial_sp unused
+4 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+HEAP 00000000
+
+Symbol: HEAP
+   Definitions
+      At line 43 in file LAB8_ex2.s
+   Uses
+      None
+Comment: HEAP unused
+Heap_Mem 00000000
+
+Symbol: Heap_Mem
+   Definitions
+      At line 44 in file LAB8_ex2.s
+   Uses
+      None
+Comment: Heap_Mem unused
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+DAbt_Addr 00000030
+
+Symbol: DAbt_Addr
+   Definitions
+      At line 70 in file LAB8_ex2.s
+   Uses
+      At line 61 in file LAB8_ex2.s
+Comment: DAbt_Addr used once
+DAbt_Handler 00000048
+
+Symbol: DAbt_Handler
+   Definitions
+      At line 77 in file LAB8_ex2.s
+   Uses
+      At line 70 in file LAB8_ex2.s
+      At line 77 in file LAB8_ex2.s
+
+DIVR6BY5 000000E0
+
+Symbol: DIVR6BY5
+   Definitions
+      At line 136 in file LAB8_ex2.s
+   Uses
+      None
+Comment: DIVR6BY5 unused
+FIQ_Addr 0000003C
+
+Symbol: FIQ_Addr
+   Definitions
+      At line 73 in file LAB8_ex2.s
+   Uses
+      At line 64 in file LAB8_ex2.s
+Comment: FIQ_Addr used once
+FIQ_Handler 00000050
+
+Symbol: FIQ_Handler
+   Definitions
+      At line 79 in file LAB8_ex2.s
+   Uses
+      At line 73 in file LAB8_ex2.s
+      At line 79 in file LAB8_ex2.s
+
+IRQ_Addr 00000038
+
+Symbol: IRQ_Addr
+   Definitions
+      At line 72 in file LAB8_ex2.s
+   Uses
+      At line 63 in file LAB8_ex2.s
+Comment: IRQ_Addr used once
+IRQ_Handler 0000004C
+
+Symbol: IRQ_Handler
+   Definitions
+      At line 78 in file LAB8_ex2.s
+   Uses
+      At line 72 in file LAB8_ex2.s
+      At line 78 in file LAB8_ex2.s
+
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+PAbt_Addr 0000002C
+
+Symbol: PAbt_Addr
+   Definitions
+      At line 69 in file LAB8_ex2.s
+   Uses
+      At line 60 in file LAB8_ex2.s
+Comment: PAbt_Addr used once
+PAbt_Handler 00000044
+
+Symbol: PAbt_Handler
+   Definitions
+      At line 76 in file LAB8_ex2.s
+   Uses
+      At line 69 in file LAB8_ex2.s
+      At line 76 in file LAB8_ex2.s
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 48 in file LAB8_ex2.s
+   Uses
+      None
+Comment: RESET unused
+Reset_Addr 00000020
+
+Symbol: Reset_Addr
+   Definitions
+      At line 66 in file LAB8_ex2.s
+   Uses
+      At line 57 in file LAB8_ex2.s
+Comment: Reset_Addr used once
+Reset_Handler 00000090
+
+Symbol: Reset_Handler
+   Definitions
+      At line 105 in file LAB8_ex2.s
+   Uses
+      At line 66 in file LAB8_ex2.s
+Comment: Reset_Handler used once
+SWI_Addr 00000028
+
+Symbol: SWI_Addr
+   Definitions
+      At line 68 in file LAB8_ex2.s
+   Uses
+      At line 59 in file LAB8_ex2.s
+Comment: SWI_Addr used once
+SWI_Handler 00000040
+
+Symbol: SWI_Handler
+   Definitions
+      At line 75 in file LAB8_ex2.s
+   Uses
+      At line 68 in file LAB8_ex2.s
+      At line 75 in file LAB8_ex2.s
+
+Undef_Addr 00000024
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+Relocatable symbols
+
+
+Symbol: Undef_Addr
+   Definitions
+      At line 67 in file LAB8_ex2.s
+   Uses
+      At line 58 in file LAB8_ex2.s
+Comment: Undef_Addr used once
+Undef_Handler 00000054
+
+Symbol: Undef_Handler
+   Definitions
+      At line 83 in file LAB8_ex2.s
+   Uses
+      At line 67 in file LAB8_ex2.s
+Comment: Undef_Handler used once
+Vectors 00000000
+
+Symbol: Vectors
+   Definitions
+      At line 57 in file LAB8_ex2.s
+   Uses
+      None
+Comment: Vectors unused
+division_loop 0000007C
+
+Symbol: division_loop
+   Definitions
+      At line 96 in file LAB8_ex2.s
+   Uses
+      At line 100 in file LAB8_ex2.s
+Comment: division_loop used once
+do_nothing 000000E4
+
+Symbol: do_nothing
+   Definitions
+      At line 138 in file LAB8_ex2.s
+   Uses
+      At line 139 in file LAB8_ex2.s
+Comment: do_nothing used once
+no_division 0000008C
+
+Symbol: no_division
+   Definitions
+      At line 102 in file LAB8_ex2.s
+   Uses
+      At line 89 in file LAB8_ex2.s
+Comment: no_division used once
+20 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+ABT_Stack_Size 00000000
+
+Symbol: ABT_Stack_Size
+   Definitions
+      At line 28 in file LAB8_ex2.s
+   Uses
+      At line 32 in file LAB8_ex2.s
+      At line 115 in file LAB8_ex2.s
+
+FIQ_Stack_Size 00000000
+
+Symbol: FIQ_Stack_Size
+   Definitions
+      At line 29 in file LAB8_ex2.s
+   Uses
+      At line 32 in file LAB8_ex2.s
+      At line 119 in file LAB8_ex2.s
+
+F_Bit 00000040
+
+Symbol: F_Bit
+   Definitions
+      At line 24 in file LAB8_ex2.s
+   Uses
+      At line 109 in file LAB8_ex2.s
+      At line 113 in file LAB8_ex2.s
+      At line 117 in file LAB8_ex2.s
+      At line 121 in file LAB8_ex2.s
+      At line 125 in file LAB8_ex2.s
+
+Heap_Size 00000100
+
+Symbol: Heap_Size
+   Definitions
+      At line 42 in file LAB8_ex2.s
+   Uses
+      At line 44 in file LAB8_ex2.s
+Comment: Heap_Size used once
+IRQ_Stack_Size 00000080
+
+Symbol: IRQ_Stack_Size
+   Definitions
+      At line 30 in file LAB8_ex2.s
+   Uses
+      At line 32 in file LAB8_ex2.s
+      At line 123 in file LAB8_ex2.s
+
+ISR_Stack_Size 00000180
+
+Symbol: ISR_Stack_Size
+   Definitions
+      At line 32 in file LAB8_ex2.s
+   Uses
+      At line 37 in file LAB8_ex2.s
+Comment: ISR_Stack_Size used once
+I_Bit 00000080
+
+Symbol: I_Bit
+   Definitions
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Absolute symbols
+
+      At line 23 in file LAB8_ex2.s
+   Uses
+      At line 109 in file LAB8_ex2.s
+      At line 113 in file LAB8_ex2.s
+      At line 117 in file LAB8_ex2.s
+      At line 121 in file LAB8_ex2.s
+      At line 125 in file LAB8_ex2.s
+
+Mode_ABT 00000017
+
+Symbol: Mode_ABT
+   Definitions
+      At line 19 in file LAB8_ex2.s
+   Uses
+      At line 113 in file LAB8_ex2.s
+Comment: Mode_ABT used once
+Mode_FIQ 00000011
+
+Symbol: Mode_FIQ
+   Definitions
+      At line 16 in file LAB8_ex2.s
+   Uses
+      At line 117 in file LAB8_ex2.s
+Comment: Mode_FIQ used once
+Mode_IRQ 00000012
+
+Symbol: Mode_IRQ
+   Definitions
+      At line 17 in file LAB8_ex2.s
+   Uses
+      At line 121 in file LAB8_ex2.s
+Comment: Mode_IRQ used once
+Mode_SVC 00000013
+
+Symbol: Mode_SVC
+   Definitions
+      At line 18 in file LAB8_ex2.s
+   Uses
+      At line 125 in file LAB8_ex2.s
+Comment: Mode_SVC used once
+Mode_SYS 0000001F
+
+Symbol: Mode_SYS
+   Definitions
+      At line 21 in file LAB8_ex2.s
+   Uses
+      None
+Comment: Mode_SYS unused
+Mode_UND 0000001B
+
+Symbol: Mode_UND
+   Definitions
+      At line 20 in file LAB8_ex2.s
+   Uses
+      At line 109 in file LAB8_ex2.s
+Comment: Mode_UND used once
+Mode_USR 00000010
+
+Symbol: Mode_USR
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+Absolute symbols
+
+   Definitions
+      At line 15 in file LAB8_ex2.s
+   Uses
+      At line 129 in file LAB8_ex2.s
+Comment: Mode_USR used once
+SVC_Stack_Size 00000080
+
+Symbol: SVC_Stack_Size
+   Definitions
+      At line 27 in file LAB8_ex2.s
+   Uses
+      At line 32 in file LAB8_ex2.s
+      At line 127 in file LAB8_ex2.s
+
+UND_Stack_Size 00000080
+
+Symbol: UND_Stack_Size
+   Definitions
+      At line 26 in file LAB8_ex2.s
+   Uses
+      At line 32 in file LAB8_ex2.s
+      At line 111 in file LAB8_ex2.s
+
+USR_Stack_Size 00000400
+
+Symbol: USR_Stack_Size
+   Definitions
+      At line 31 in file LAB8_ex2.s
+   Uses
+      At line 36 in file LAB8_ex2.s
+      At line 131 in file LAB8_ex2.s
+
+17 symbols
+369 symbols in table

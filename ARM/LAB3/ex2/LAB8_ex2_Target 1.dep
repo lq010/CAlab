@@ -1,0 +1,2 @@
+Dependencies for Project 'LAB8_ex2', Target 'Target 1': (DO NOT MODIFY !)
+F (.\LAB8_ex2.s)(0x5A5D01DE)(--cpu ARM7TDMI --pd "__EVAL SETA 1" -g --apcs=interwork -I "C:\Keil\ARM\INC" -I "C:\Keil\ARM\INC\Philips" --list "LAB8_ex2.lst" --xref -o "LAB8_ex2.o" --depend "LAB8_ex2.d")

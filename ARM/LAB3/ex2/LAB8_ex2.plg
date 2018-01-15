@@ -1,0 +1,62 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\Politecnico\Specialistica\Computer Architecture\Laboratories\CAlab\ARM\LAB3\ex2\LAB8_ex2.uvproj
+Project File Date:  01/15/2018
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling LAB8_ex2.s...
+LAB8_ex2.s(118): error: A1108E: Multiply defined symbol 'DIVR6BY5'
+LAB8_ex2.s:   118 000000ac DIVR6BY5
+LAB8_ex2.s: 1 Error, 0 Warnings
+Target not created
+Build target 'Target 1'
+assembling LAB8_ex2.s...
+LAB8_ex2.s(68): error: A1516E: Bad symbol 'SWI_Handler', not defined or external
+LAB8_ex2.s:    68 00000028 SWI_Addr        DCD     SWI_Handler
+LAB8_ex2.s:                                        ^
+LAB8_ex2.s: 1 Error, 0 Warnings
+Target not created
+Build target 'Target 1'
+assembling LAB8_ex2.s...
+linking...
+Program Size: Code=184 RO-data=0 RW-data=0 ZI-data=1664  
+"LAB8_ex2.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling LAB8_ex2.s...
+linking...
+Program Size: Code=232 RO-data=0 RW-data=0 ZI-data=1664  
+"LAB8_ex2.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling LAB8_ex2.s...
+linking...
+Program Size: Code=232 RO-data=0 RW-data=0 ZI-data=1664  
+"LAB8_ex2.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling LAB8_ex2.s...
+linking...
+Program Size: Code=236 RO-data=0 RW-data=0 ZI-data=1664  
+"LAB8_ex2.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling LAB8_ex2.s...
+linking...
+Program Size: Code=236 RO-data=0 RW-data=0 ZI-data=1664  
+"LAB8_ex2.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling LAB8_ex2.s...
+linking...
+Program Size: Code=236 RO-data=0 RW-data=0 ZI-data=1664  
+"LAB8_ex2.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling LAB8_ex2.s...
+linking...
+Program Size: Code=236 RO-data=0 RW-data=0 ZI-data=1664  
+"LAB8_ex2.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling LAB8_ex2.s...
+linking...
+Program Size: Code=236 RO-data=0 RW-data=0 ZI-data=1664  
+"LAB8_ex2.axf" - 0 Error(s), 0 Warning(s).
