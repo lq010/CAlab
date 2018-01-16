@@ -6,19 +6,19 @@ ARM Macro Assembler    Page 1
 
     1 00000000                 AREA             MYCODE, CODE, READONLY
     2 00000000         
-    3 00000000         ENTRY
+    3 00000000                 ENTRY
     4 00000000         
     5 00000000         ; initialization of registers r0-r7 (hexadecimal values)
                        
     6 00000000         
-    7 00000000 E3A00001        MOV              r0, #1
-    8 00000004 E3A01002        MOV              r1, #2
-    9 00000008 E3A02003        MOV              r2, #3
-   10 0000000C E3A03003        MOV              r3, #3
-   11 00000010 E3A04005        MOV              r4, #5
-   12 00000014 E3A05006        MOV              r5, #6
-   13 00000018 E3A06007        MOV              r6, #7
-   14 0000001C E3A07008        MOV              r7, #8
+    7 00000000 E3A00001        MOV              R0, #1
+    8 00000004 E3A01002        MOV              R1, #2
+    9 00000008 E3A02003        MOV              R2, #3
+   10 0000000C E3A03004        MOV              R3, #4
+   11 00000010 E3A04005        MOV              R4, #5
+   12 00000014 E3A05006        MOV              R5, #6
+   13 00000018 E3A06007        MOV              R6, #7
+   14 0000001C E3A07007        MOV              R7, #7
    15 00000020         
    16 00000020         ;compute means if different, product if equal
    17 00000020         
@@ -52,14 +52,6 @@ ARM\INC -IC:\Keil\ARM\INC\Philips --predefine="__EVAL SETA 1" --list=ex1.lst ex
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Relocatable symbols
 
-ENTRY 00000000
-
-Symbol: ENTRY
-   Definitions
-      At line 3 in file ex1.s
-   Uses
-      None
-Comment: ENTRY unused
 MYCODE 00000000
 
 Symbol: MYCODE
@@ -68,5 +60,5 @@ Symbol: MYCODE
    Uses
       None
 Comment: MYCODE unused
-2 symbols
-326 symbols in table
+1 symbol
+325 symbols in table

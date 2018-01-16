@@ -44,7 +44,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\</OutputDirectory>
-          <OutputName>ex1</OutputName>
+          <OutputName>LAB1_ex3</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -387,9 +387,9 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>ex1.s</FileName>
+              <FileName>LAB1_ex3.s</FileName>
               <FileType>2</FileType>
-              <FilePath>.\ex1.s</FilePath>
+              <FilePath>.\LAB1_ex3.s</FilePath>
             </File>
           </Files>
         </Group>

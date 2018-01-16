@@ -1,12 +1,13 @@
 	AREA MYCODE, CODE, READONLY
 
-ENTRY
+	ENTRY
 
-	MOV r0, #3 
-	MOV r1, #2
-	MOV r2, #1
+	MOV r0, #15 
+	MOV r1, #5
+	MOV r2, #21
 
-	CMP r0, r1 ;if R0 > R1 -> swap registers (use r3 as temporary register)
+	;swap registers if the first is higher than the second (R3 temporary register)
+	CMP r0, r1 
 	MOVHI R3, R0
 	MOVHI R0, R1
 	MOVHI R1, R3
@@ -21,21 +22,20 @@ ENTRY
 	MOVHI R1, R2
 	MOVHI R2, R3
 
-	;checking if R1 and R2 are multiple of R0 by multiple addition
-	MOV r6,#0 ;reset counter
+	;checking if R1 and R2 are multiple of R0 (multiple subtractions)
+
 loop1
-	ADD r4,r4,r0	
-	CMP r4,r1 
-	ADDLS r6,r6,#1 ;increment counter (how many times R0 is in R1)
-	BLO loop1 ;exit loop if R4 > R1 (not divisible)
-	MOVEQ r4,r6 ;save the quotient if divisible
+	SUB R1,R1,R0
+	CMP R1,#0 
+	ADDGE R4,R4,#1 ;Signed Greater or Equal because if the result is negative it will be interpreted as positive in unsigned notation
+	BGT loop1
+	MOVNE R4,#0 ;if result of division not zero, dont save
 		
-	MOV r6,#0
 loop2
-	ADD r5,r5,r0	
-	CMP r5,r2 
-	ADDLS r6,r6,#1 
-	BLO loop2 
-	MOVEQ r5,r6
+	SUB R2,R2,R0
+	CMP R2,#0 
+	ADDGE R5,R5,#1
+	BGT loop2
+	MOVNE R5,#0
 	
 	END

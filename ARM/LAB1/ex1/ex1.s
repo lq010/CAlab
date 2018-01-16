@@ -1,17 +1,17 @@
 	AREA MYCODE, CODE, READONLY
 
-ENTRY
+	ENTRY
 
 ; initialization of registers r0-r7 (hexadecimal values)
 
-	MOV r0, #1 
-	MOV r1, #2
-	MOV r2, #3
-	MOV r3, #3
-	MOV r4, #5
-	MOV r5, #6
-	MOV r6, #7
-	MOV r7, #8
+	MOV R0, #1 
+	MOV R1, #2
+	MOV R2, #3
+	MOV R3, #4
+	MOV R4, #5
+	MOV R5, #6
+	MOV R6, #7
+	MOV R7, #7
 
 ;compute means if different, product if equal
 
