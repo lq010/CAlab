@@ -1,0 +1,69 @@
+.MODEL small
+.STACK
+
+
+.DATA
+DECKS DB 218 DUP(?)
+CARDSTAKEN DB (?)
+NCARD DB (?)
+CARD1 DB (?)
+CARD2 DB (?)
+CARD3 DB (?)
+SCORE DB (?)
+
+.CODE
+.STARTUP
+student_loop:
+CALL askfortoken
+CALL drawCard
+CALL basicRule
+INC SI
+CMP SI,NSTUD
+JB student_loop
+.EXIT
+
+askfortoken PROC
+PUSH AX
+MOV AH,1
+ask_tok:
+INT 21h
+CMP AL,3
+JA ask_tok ;must be <= 3
+CMP AL,1
+JB ask_tok
+MOV 
+askfortoken ENDP
+
+drawCard PROC
+PUSH AX
+PUSH BX
+PUSH SI
+PUSH DI
+XOR DI,DI
+XOR SI,SI
+MOV DI,CARDSTAKEN
+MOV AH,1
+draw:
+INT 21h
+CMP AL,79h
+JNE end_draw
+MOV BL,DECKS[DI]
+MOV CARD1[SI],BL
+INC SI
+CMP SI,NTOK
+JB draw
+end_draw:
+ADD NCARD,SI
+MOV CARDSTAKEN,DI
+POP DI
+POP SI
+POP BX
+POP AX
+RET
+drawCard ENDP
+
+basicRule PROC
+
+basicRule ENDP
+
+END
