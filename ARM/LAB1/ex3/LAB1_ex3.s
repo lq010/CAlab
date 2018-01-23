@@ -55,20 +55,42 @@ decreasing_loop
 	BNE decreasing_loop
 
 	;larger absolute difference between two consecutive numbers
-	MOV R0,=sequence
+	LDR R0,=sequence
 	MOV R1,#0
 	MOV R2,#0
-	MOV R4,#0
+	MOV R4,#0 ;max absolute difference temp register
 lad_loop
-	
-	
-
-
+	MOV R1,[R0]
+  MOV R2,[R0],#4
+  SUB R1,R2,R1
+	;invert if negative (absolute value) using Bit Clear
+  CMP R1,#0
+  BICLT R1,R5,R1 ;R5=0
+  ADD R1,R1,#1
+  CMP R1,R4
+  MOVGT R4,R1
+  ADD R6,R6,#1
+  CMP R6,#8
+  BNE lad_loop
 	B end_programm
 
 	;monotonic sequence, find min and max value
 monotonic
-
-end_programm
+  LDR R0,=sequence
+  MOV R1,#0 ;temp register
+  MOV R2,#0 ;temp for maximum
+  MOV R3,#0 ;temp for minimum
+  MOV R4,#0 ;counter register
+min_max_loop
+  MOV RI,[R0],#4
+  CMP R1,R2
+  MOVGT R2,R1 ;update max
+  CMP R1,R3
+  MOVLT R3,R1 ;update min
+  ADD R4,R4,#1
+  CMP R4,#8
+  BNE min_max_loop
+  
+  end_programm
 	 
 	END
