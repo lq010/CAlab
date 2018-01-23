@@ -1,9 +1,8 @@
 .data
 
-X: .byte 1,2,3,4,5,6,7,8,9,10 ;the even parity of each byte will be 1 and 0 alternatively
-							  ;expected results: 128(1000 0000)+X[1] when #ones odd
-							  ;				     X[i] when #ones even
-							  ;(expressed in hexadecimal in winMips)
+X: .byte 1,2,3,4,5,6,7,8,9,10 
+;the even parity of each byte will be 1 and 0 alternatively
+;expected results: 128(1000 0000)+X[1] when #ones odd, X[i] when #ones even (expressed in hexadecimal in winMips)
 .code
 
 daddui r10,r0,7	 ;"scan byte" cycle limit
