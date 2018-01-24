@@ -23,27 +23,28 @@ N=3
                                                             e error "Entry poin
                                                             t does not point to
                                                              an instruction") 
-   12 00000004 FFFFFFFE 
-              FFFFFFFF 
-              00000003 
-              00000003 
-              00000005 
-              00000006 
+   12 00000004 00000008 
               00000007 
-              00000008 sequence
-                               DCD              -2,-1,3,3,5,6,7,8
+              00000006 
+              00000005 
+              00000032 
+              00000004 
+              FFFFFFFF 
+              FFFFFFFB sequence
+                               DCD              8,7,6,5,50,4,-1,-5
    13 00000024         
    14 00000024         ;check increasing
    15 00000024 E3A01102        MOV              R1,#0x80000000 ;lowest possibl 
-                                                            value at start
-   16 00000028 E59F0048        LDR              R0,=sequence ;pointer to sequen
+                                                            value at start (sig
+                                                            ned)
+   16 00000028 E59F00FC        LDR              R0,=sequence ;pointer to sequen
                                                             ce
    17 0000002C         increasing_loop
    18 0000002C E4902004        LDR              R2,[R0],#4  ;load value (post-a
                                                             ddressing mode)
    19 00000030 E1520001        CMP              R2,R1
-   20 00000034 BA00000F        BLT              decreasing_loop ;exit directly 
-                                                            if found R2 < R1
+   20 00000034 BA00000F        BLT              decreasing  ;exit directly if f
+                                                            ound R2 < R1
    21 00000038 11A01002        MOVNE            R1,R2       ;update previous va
                                                             lue (if not equal)
    22 0000003C E2844001        ADD              R4,R4,#1
@@ -62,13 +63,13 @@ N=3
    31 00000054 E3540000        CMP              R4,#0
    32 00000058 1AFFFFFA        BNE              sum_loop
    33 0000005C         
-   34 0000005C         mean_loop
 
 
 
 ARM Macro Assembler    Page 2 
 
 
+   34 0000005C         mean_loop
    35 0000005C E2433008        SUB              R3,R3,#8    ;dividing R3 by 8 b
                                                             y multiple differen
                                                             ces
@@ -78,16 +79,95 @@ ARM Macro Assembler    Page 2
                                                             ter than (not equal
                                                             )
    39 0000006C         
-   40 0000006C E59F0008        LDR              R0,=mean
+   40 0000006C E59F00BC        LDR              R0,=mean
    41 00000070 E5804000        STR              R4,[R0]
-   42 00000074 EAFFFFFF        B                end_programm
+   42 00000074 EA00002C        B                end_programm
    43 00000078         
    44 00000078         ;check decreasing
-   45 00000078         decreasing_loop
-   46 00000078         
-   47 00000078         end_programm
-   48 00000078         
-   49 00000078                 END
+   45 00000078         decreasing
+   46 00000078 E3A04000        MOV              R4,#0
+   47 0000007C E3E01102        MOV              R1,#0x7fffffff ;highest possibl
+                                                            e value at start (s
+                                                            igned)
+   48 00000080 E59F00A4        LDR              R0,=sequence ;pointer to sequen
+                                                            ce
+   49 00000084         decreasing_loop
+   50 00000084 E4902004        LDR              R2,[R0],#4  ;load value (post-a
+                                                            ddressing mode)
+   51 00000088 E1520001        CMP              R2,R1
+   52 0000008C CA000015        BGT              monotonic   ;exit directly if f
+                                                            ound R2 > R1
+   53 00000090 11A01002        MOVNE            R1,R2       ;update previous va
+                                                            lue (if not equal)
+   54 00000094 E2844001        ADD              R4,R4,#1
+   55 00000098 E3540008        CMP              R4,#8
+   56 0000009C 1AFFFFF8        BNE              decreasing_loop
+   57 000000A0         
+   58 000000A0         ;larger absolute difference between two consecutive numb
+                       ers
+   59 000000A0 E59F0084        LDR              R0,=sequence
+   60 000000A4 E3A01000        MOV              R1,#0
+   61 000000A8 E3A02000        MOV              R2,#0
+   62 000000AC E3A04000        MOV              R4,#0       ;max absolute diffe
+                                                            rence temp register
+                                                            
+   63 000000B0         lad_loop
+   64 000000B0 E4901004        LDR              R1,[R0],#4
+   65 000000B4 E5902000        LDR              R2,[R0]
+   66 000000B8 E0421001        SUB              R1,R2,R1
+   67 000000BC         ;invert if negative (absolute value) using Bit Clear
+   68 000000BC E3510000        CMP              R1,#0
+   69 000000C0 B1C51001        BICLT            R1,R5,R1    ;R5=0
+   70 000000C4 E2811001        ADD              R1,R1,#1
+   71 000000C8 E1510004        CMP              R1,R4
+   72 000000CC C1A04001        MOVGT            R4,R1
+   73 000000D0 E2866001        ADD              R6,R6,#1
+   74 000000D4 E3560007        CMP              R6,#7       ;one less than arra
+                                                            y lenght in this ca
+                                                            se (otherwise go af
+                                                            ter array the last 
+                                                            element)
+   75 000000D8 1AFFFFF4        BNE              lad_loop
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+   76 000000DC         
+   77 000000DC E59F0050        LDR              R0,=max_differ
+   78 000000E0 E5804000        STR              R4,[R0]
+   79 000000E4 EA000010        B                end_programm
+   80 000000E8         
+   81 000000E8         ;monotonic sequence, find min and max value
+   82 000000E8         monotonic
+   83 000000E8 E59F003C        LDR              R0,=sequence
+   84 000000EC E3A01000        MOV              R1,#0       ;temp register
+   85 000000F0 E3A02000        MOV              R2,#0       ;temp for maximum
+   86 000000F4 E3A03000        MOV              R3,#0       ;temp for minimum
+   87 000000F8 E3A04000        MOV              R4,#0       ;counter register
+   88 000000FC         min_max_loop
+   89 000000FC E4901004        LDR              R1,[R0],#4
+   90 00000100 E1510002        CMP              R1,R2
+   91 00000104 C1A02001        MOVGT            R2,R1       ;update max
+   92 00000108 E1510003        CMP              R1,R3
+   93 0000010C B1A03001        MOVLT            R3,R1       ;update min
+   94 00000110 E2844001        ADD              R4,R4,#1
+   95 00000114 E3540008        CMP              R4,#8
+   96 00000118 1AFFFFF7        BNE              min_max_loop
+   97 0000011C         
+   98 0000011C         ;store result in memory
+   99 0000011C E59F0014        LDR              R0,=max_value
+  100 00000120 E5802000        STR              R2,[R0]
+  101 00000124 E59F0010        LDR              R0,=min_value
+  102 00000128 E5803000        STR              R3,[R0]
+  103 0000012C         
+  104 0000012C         end_programm
+  105 0000012C         
+  106 0000012C                 END
+              00000000 
+              00000000 
+              00000000 
               00000000 
               00000000 
 Command Line: --debug --xref --apcs=interwork --depend=LAB1_ex3.d -oLAB1_ex3.o 
@@ -113,16 +193,16 @@ Symbol: max_differ
    Definitions
       At line 5 in file LAB1_ex3.s
    Uses
-      None
-Comment: max_differ unused
+      At line 77 in file LAB1_ex3.s
+Comment: max_differ used once
 max_value 00000008
 
 Symbol: max_value
    Definitions
       At line 6 in file LAB1_ex3.s
    Uses
-      None
-Comment: max_value unused
+      At line 99 in file LAB1_ex3.s
+Comment: max_value used once
 mean 00000000
 
 Symbol: mean
@@ -137,8 +217,8 @@ Symbol: min_value
    Definitions
       At line 7 in file LAB1_ex3.s
    Uses
-      None
-Comment: min_value unused
+      At line 101 in file LAB1_ex3.s
+Comment: min_value used once
 5 symbols
 
 
@@ -154,22 +234,31 @@ Symbol: MYCODE
    Uses
       None
 Comment: MYCODE unused
-decreasing_loop 00000078
+decreasing 00000078
 
-Symbol: decreasing_loop
+Symbol: decreasing
    Definitions
       At line 45 in file LAB1_ex3.s
    Uses
       At line 20 in file LAB1_ex3.s
+Comment: decreasing used once
+decreasing_loop 00000084
+
+Symbol: decreasing_loop
+   Definitions
+      At line 49 in file LAB1_ex3.s
+   Uses
+      At line 56 in file LAB1_ex3.s
 Comment: decreasing_loop used once
-end_programm 00000078
+end_programm 0000012C
 
 Symbol: end_programm
    Definitions
-      At line 47 in file LAB1_ex3.s
+      At line 104 in file LAB1_ex3.s
    Uses
       At line 42 in file LAB1_ex3.s
-Comment: end_programm used once
+      At line 79 in file LAB1_ex3.s
+
 increasing_loop 0000002C
 
 Symbol: increasing_loop
@@ -178,6 +267,14 @@ Symbol: increasing_loop
    Uses
       At line 24 in file LAB1_ex3.s
 Comment: increasing_loop used once
+lad_loop 000000B0
+
+Symbol: lad_loop
+   Definitions
+      At line 63 in file LAB1_ex3.s
+   Uses
+      At line 75 in file LAB1_ex3.s
+Comment: lad_loop used once
 mean_loop 0000005C
 
 Symbol: mean_loop
@@ -186,6 +283,28 @@ Symbol: mean_loop
    Uses
       At line 38 in file LAB1_ex3.s
 Comment: mean_loop used once
+min_max_loop 000000FC
+
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+Symbol: min_max_loop
+   Definitions
+      At line 88 in file LAB1_ex3.s
+   Uses
+      At line 96 in file LAB1_ex3.s
+Comment: min_max_loop used once
+monotonic 000000E8
+
+Symbol: monotonic
+   Definitions
+      At line 82 in file LAB1_ex3.s
+   Uses
+      At line 52 in file LAB1_ex3.s
+Comment: monotonic used once
 sequence 00000004
 
 Symbol: sequence
@@ -193,7 +312,10 @@ Symbol: sequence
       At line 12 in file LAB1_ex3.s
    Uses
       At line 16 in file LAB1_ex3.s
-Comment: sequence used once
+      At line 48 in file LAB1_ex3.s
+      At line 59 in file LAB1_ex3.s
+      At line 83 in file LAB1_ex3.s
+
 sum_loop 00000048
 
 Symbol: sum_loop
@@ -202,7 +324,7 @@ Symbol: sum_loop
    Uses
       At line 32 in file LAB1_ex3.s
 Comment: sum_loop used once
-7 symbols
+11 symbols
 
 
 
@@ -221,4 +343,4 @@ Symbol: size_32
       At line 7 in file LAB1_ex3.s
 
 1 symbol
-339 symbols in table
+343 symbols in table
