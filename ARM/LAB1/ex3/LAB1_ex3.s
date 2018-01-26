@@ -9,10 +9,12 @@ min_value SPACE size_32
 	AREA MYCODE, CODE, READONLY
 	ENTRY
 	MOV R0,#0 ;(otherwise give the error "Entry point does not point to an instruction")	
-sequence DCD 8,7,6,5,50,4,-1,-5
+;sequence DCD 8,7,6,5,50,4,-1,-5 ;no monotonic
+sequence DCD -3,-2,-1,2,3,5,10,15 ;increasing
+;sequence DCD 8,7,6,5,5,4,-1,-5 ;decreasing
 	
 	;check increasing
-	MOV R1,#0x80000000 ;lowest possibl value at start (signed)
+	MOV R1,#0x80000000 ;lowest possible value at start (signed)
 	LDR R0,=sequence ;pointer to sequence
 increasing_loop
 	LDR R2,[R0],#4 ;load value (post-addressing mode)
@@ -30,15 +32,9 @@ sum_loop
 	SUB R4,R4,#1
 	CMP R4,#0
 	BNE sum_loop		
-
-mean_loop
-	SUB R3,R3,#8 ;dividing R3 by 8 by multiple differences
-	CMP R3,#0
-	ADDGE R4,R4,#1 ;quotient
-	BGT mean_loop ;retry only if greater than (not equal)
-	
+	LSR R3,R3,#3 ;dividing R3 by 8 by shifting
 	LDR R0,=mean
-	STR R4,[R0]
+	STR R3,[R0]
 	B end_programm
 
 	;check decreasing

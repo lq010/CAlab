@@ -9,73 +9,11 @@ Project File Date:  01/16/2018
 <h2>Output:</h2>
 Build target 'Target 1'
 assembling LAB1_ex3.s...
-LAB1_ex3.s(63): warning: A1865W: '#' not seen before constant expression
-LAB1_ex3.s:    63 000000b0   MOV R1,[R0]
-LAB1_ex3.s:                         ^
-LAB1_ex3.s(63): error: A1106E: Missing comma
-LAB1_ex3.s:    63 000000b0   MOV R1,[R0]
-LAB1_ex3.s:                         ^
-LAB1_ex3.s(64): warning: A1865W: '#' not seen before constant expression
-LAB1_ex3.s:    64 000000b0   MOV R2,[R0],#4
-LAB1_ex3.s:                         ^
-LAB1_ex3.s(64): error: A1106E: Missing comma
-LAB1_ex3.s:    64 000000b0   MOV R2,[R0],#4
-LAB1_ex3.s:                         ^
-LAB1_ex3.s(85): error: A1647E: Bad register name symbol, expected Integer register
-LAB1_ex3.s:    85 000000ec   MOV RI,[R0],#4
-LAB1_ex3.s:                      ^
-LAB1_ex3.s(94): error: A1163E: Unknown opcode end_programm , expecting opcode or Macro
-LAB1_ex3.s:    94 00000108   end_programm
-LAB1_ex3.s:                  ^
-LAB1_ex3.s: 4 Errors, 2 Warnings
-Target not created
-Build target 'Target 1'
-assembling LAB1_ex3.s...
-LAB1_ex3.s(85): error: A1647E: Bad register name symbol, expected Integer register
-LAB1_ex3.s:    85 000000f4   LDR RI,[R0],#4
-LAB1_ex3.s:                      ^
-LAB1_ex3.s(94): error: A1163E: Unknown opcode end_programm , expecting opcode or Macro
-LAB1_ex3.s:    94 00000110   end_programm
-LAB1_ex3.s:                  ^
-LAB1_ex3.s: 2 Errors, 0 Warnings
-Target not created
-Build target 'Target 1'
-assembling LAB1_ex3.s...
 linking...
-Program Size: Code=284 RO-data=0 RW-data=0 ZI-data=16  
+Program Size: Code=308 RO-data=0 RW-data=0 ZI-data=16  
 "LAB1_ex3.axf" - 0 Error(s), 0 Warning(s).
 Build target 'Target 1'
 assembling LAB1_ex3.s...
 linking...
-Program Size: Code=284 RO-data=0 RW-data=0 ZI-data=16  
-"LAB1_ex3.axf" - 0 Error(s), 0 Warning(s).
-Build target 'Target 1'
-assembling LAB1_ex3.s...
-linking...
-Program Size: Code=284 RO-data=0 RW-data=0 ZI-data=16  
-"LAB1_ex3.axf" - 0 Error(s), 0 Warning(s).
-Build target 'Target 1'
-assembling LAB1_ex3.s...
-linking...
-Program Size: Code=284 RO-data=0 RW-data=0 ZI-data=16  
-"LAB1_ex3.axf" - 0 Error(s), 0 Warning(s).
-Build target 'Target 1'
-assembling LAB1_ex3.s...
-linking...
-Program Size: Code=284 RO-data=0 RW-data=0 ZI-data=16  
-"LAB1_ex3.axf" - 0 Error(s), 0 Warning(s).
-Build target 'Target 1'
-assembling LAB1_ex3.s...
-linking...
-Program Size: Code=284 RO-data=0 RW-data=0 ZI-data=16  
-"LAB1_ex3.axf" - 0 Error(s), 0 Warning(s).
-Build target 'Target 1'
-assembling LAB1_ex3.s...
-linking...
-Program Size: Code=284 RO-data=0 RW-data=0 ZI-data=16  
-"LAB1_ex3.axf" - 0 Error(s), 0 Warning(s).
-Build target 'Target 1'
-assembling LAB1_ex3.s...
-linking...
-Program Size: Code=320 RO-data=0 RW-data=0 ZI-data=16  
+Program Size: Code=308 RO-data=0 RW-data=0 ZI-data=16  
 "LAB1_ex3.axf" - 0 Error(s), 0 Warning(s).

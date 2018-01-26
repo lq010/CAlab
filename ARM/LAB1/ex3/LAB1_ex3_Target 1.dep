@@ -1,2 +1,2 @@
 Dependencies for Project 'LAB1_ex3', Target 'Target 1': (DO NOT MODIFY !)
-F (.\LAB1_ex3.s)(0x5A6909AE)(--cpu ARM7TDMI --pd "__EVAL SETA 1" -g --apcs=interwork -I "C:\Keil\ARM\INC" -I "C:\Keil\ARM\INC\Philips" --list "LAB1_ex3.lst" --xref -o "LAB1_ex3.o" --depend "LAB1_ex3.d")
+F (.\LAB1_ex3.s)(0x5A6BACA7)(--cpu ARM7TDMI --pd "__EVAL SETA 1" -g --apcs=interwork -I "C:\Keil\ARM\INC" -I "C:\Keil\ARM\INC\Philips" --list "LAB1_ex3.lst" --xref -o "LAB1_ex3.o" --depend "LAB1_ex3.d")
