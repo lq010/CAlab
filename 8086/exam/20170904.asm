@@ -21,7 +21,7 @@ B_TO_TP DB 29
 C_TO_D  DB 4
 D_TO_TP DB 45
 
-H_LEAVE DW 0C1Eh ; 12:30
+H_LEAVE DW 110Fh ; 17:15
 H_SWAP DW 0
 
 ;finded best departure times
@@ -38,72 +38,51 @@ AB_TOT_TIME DW 0
 CD_TOT_TIME DW 0
 
 ;time to wait in case of next day ride
-TWND DW 0
+TWND_AB DW 0
+TWND_CD DW 0
 
 .CODE 
 .STARTUP
- 
-;if H_LEAVE > A_SCHED[N_SCHED]: too late, first bus of nex day
-  MOV AL,A_SCHED[N_SCHED*2-2]
-  MOV AH,A_SCHED[N_SCHED*2-1]
-  CMP H_LEAVE,AX
-  JB find_a
-  ;save the first schedule of the next day
-  MOV AL,A_SCHED[0]
-  MOV AH,A_SCHED[1]
-  MOV A_LEAVE,AX
-  ;compute time to wait until next day ride
-  ;(time up to the end of the day + time to wait until next day first ride)
-  XOR CX,CX
-  XOR DX,DX
-  ADD CH,23
-  ADD CL,59
-  SUB CX,H_LEAVE
-  ADD CX,A_LEAVE
-  MOV TWND,CX
-  JMP skip_find_a
-;else:
-  ;finding nearest A bus departure
-  ;while H_LEAVE > A_SCHED
-    find_a:
-    MOV AL,A_SCHED[SI]
-    INC SI
-    MOV AH,A_SCHED[SI]
-    INC SI
-    CMP H_LEAVE,AX
-    JA find_a
-  ;end while (find_a)
-  MOV A_LEAVE,AX
-;end if
+;---------------------------------
+;---------- A to B trip ----------
+;---------------------------------
+;find nearest A bus departure
+MOV AX, H_LEAVE
+MOV BX, offset A_SCHED
+CALL nextRide
+MOV A_LEAVE, BX
+;update overflow [if present]
+ADD TWND_AB, AX
 
-skip_find_a:
 ;arrival time to B
-;MOV AX, A_LEAVE
-MOV BL, A_TO_B
+XOR AX, AX
+MOV AL, A_TO_B
+;MOV BX, A_LEAVE
 CALL sumTime
-MOV H_SWAP,BX 
+MOV H_SWAP, BX
 
-;finding nearest B bus departure
-XOR AX,AX
-XOR SI,SI
-;while H_SWAP(BX) > B_SCHED
-  find_b:
-  MOV AL,B_SCHED[SI]
-  INC SI
-  MOV AH,B_SCHED[SI]
-  INC SI
-  CMP BX,AX
-  JA find_b
-;end while (find_b)
-MOV B_LEAVE,AX
+;find nearest B bus departure
+MOV AX, H_SWAP
+MOV BX, offset B_SCHED
+CALL nextRide
+MOV B_LEAVE, BX
+;update overflow [if present]
+MOV BX,TWND_AB
+CALL sumTime
+MOV TWND_AB, BX
 
 ;arrival time to destination:
 XOR BX,BX 
-;MOV AX,B_LEAVE
+MOV AX, B_LEAVE
 MOV BL, B_TO_TP
 CALL sumTime
-MOV AB_ARRIVE_TIME,BX
+MOV AB_ARRIVE_TIME, BX
 
+;total time A-B
+;if TWND_AB=0: no overflow problem
+;else:
+;end if 
+MOV AX,H_LEAVE
 
 .EXIT
 
@@ -128,9 +107,49 @@ sumTime ENDP
 
 ;given a time and schedule, find the next scheduled ride
 ;parameters passed by registers
-;input: AX (pointer to the schedule vector), BX (initial time)
-;output: AX (finded next ride time)
+;input: AX (initial time), BX (pointer to the schedule vector), 
+;output: BX (finded next ride time), AX (overflow time to next day [if any])
+;!WARNING: to pass pointer we need to use BX!  
 nextRide PROC
+PUSH CX
+;if AX(time) > BX[N_SCHED](last ride): too late, wait first bus of nex day
+  MOV CL,[BX][N_SCHED*2-2]
+  MOV CH,[BX][N_SCHED*2-1]
+  CMP AX,CX
+  JB scan_schedule
+  ;save the first schedule of the next day
+  MOV CL,BX[0]
+  MOV CH,BX[1]
+  ;compute time to wait until next day ride
+  XOR BX,BX
+  ADD BH,23
+  ADD BL,59
+  SUB BX,AX ;time up to the end of the day
+  ADD BX,CX ;time to wait until next day first ride
+  MOV AX,BX ;save overflow return value
+  MOV BX,CX ;save departure time
+  JMP end_nextRide
+;else:
+  scan_schedule:
+  ;finding nearest scheduled bus departure
+  PUSH SI
+  XOR SI,SI
+  ;while AX(time) > BX(schedule time)
+    schedule_loop:
+    MOV CL,BX[SI]
+    INC SI
+    MOV CH,BX[SI]
+    INC SI
+    CMP AX,CX
+    JA schedule_loop
+  ;end while (scan_schedule)
+  MOV BX,CX
+  XOR AX,AX ;return no overflow
+  POP SI
+;end if
+end_nextRide:
+POP CX
+RET
 nextRide ENDP
 
 
@@ -141,11 +160,17 @@ nextRide ENDP
 toMinute PROC
 PUSH CX
 XOR CX,CX
-MOV CL,AH ;cycle on hours
-XOR AH,AH ;reset hours
-h_to_m:
-ADD AX,60
-LOOP h_to_m
+;if AH(hours) == 0: do nothing 
+  CMP AH,0 ;only minutes
+  JE skip_toMinute
+;else:
+  MOV CL,AH ;cycle on hours
+  XOR AH,AH ;reset hours
+    h_to_m:
+    ADD AX,60
+    LOOP h_to_m
+;end if
+skip_toMinute:
 POP CX
 RET
 toMinute ENDP
