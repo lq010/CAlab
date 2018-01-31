@@ -3,7 +3,7 @@
 
 .DATA
 ;OBJ_PRICES DW 50 DUP(?)
-OBJ_PRICES DW 32,16,8,4 ;decreasing ordered
+OBJ_PRICES DW 255,16,8,4 ;decreasing ordered
 N_BUY DB ? ;#products bought
 ITEMS DW 2 DUP(?) ;ID number of products
 
@@ -14,7 +14,7 @@ STR_DISC DB " save: $"
 STR_PRICE DB "Total price: $"
 STR_ITA DB "ItemA: $"
 STR_ITB DB "ItemB: $"
-OUTSTR DB 5 DUP(?) ;integer to ascii string 
+OUTSTR DB 6 DUP(?) ;integer to ascii string (max 5 characters x 16bit integer number +1 for sign)
 
 .CODE
 .STARTUP
@@ -180,7 +180,7 @@ POP DX
 MOV AX,DX
 CALL toAscii
 
-MOV SI,5
+MOV SI,6
 MOV AH,2
 print_loop2:
 MOV DL,OUTSTR[SI-1]
@@ -190,7 +190,7 @@ CMP SI,0
 JA print_loop2
 
 ;reset OUTSTR
-MOV SI,5
+MOV SI,6
 res_loop:
 MOV OUTSTR[SI-1],0
 DEC SI
@@ -206,7 +206,7 @@ INT 21h
 MOV AX,CX
 CALL toAscii
 
-MOV SI,5
+MOV SI,6
 MOV AH,2
 print_loop_2:
 MOV DL,OUTSTR[SI-1]
@@ -216,7 +216,7 @@ CMP SI,0
 JA print_loop_2
 
 ;reset OUTSTR
-MOV SI,5
+MOV SI,6
 res_loop2:
 MOV OUTSTR[SI-1],0
 DEC SI
@@ -248,6 +248,12 @@ PUSH SI
 
 XOR DX,DX
 MOV BX,10
+
+;if AX negative: 2's complement and insert minus sign
+CMP AX,0
+JGE division_loop
+NEG AX
+MOV OUTSTR[5],02Dh ;minus character 
 
 division_loop:
 DIV BX
