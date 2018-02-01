@@ -43,10 +43,42 @@ JE ask_item_number
 
 ;input: product 1
 XOR AX,AX
-MOV AL,N
-LEA BX,ITEMS[0]
+XOR BX,BX
+XOR CX,CX
+
+prod1_input:
+;print string
 LEA DX,ASK_ITEM_1
-CALL askItem 
+MOV AH,09h
+INT 21h
+;ask first char
+MOV AH,1
+INT 21h
+SUB AL,48
+MOV DL,AL
+;ask second char
+INT 21h
+CMP AL,13 ;if CR
+JE prod1_end
+SUB AL,48
+MOV CL,AL
+MOV AL,DL
+MOV BL,10
+MUL BL
+ADD AX,CX
+MOV DL,AL 
+prod1_end:
+MOV byte ptr ITEMS[0],DL ;save prod1
+MOV AH,2
+MOV DL,0Ah 
+INT 21h
+MOV DL,0Dh
+INT 21h
+;check in range
+MOV AL,byte ptr ITEMS[0]
+MOV BL,N ;(max index N-1)
+CMP AL,BL
+JAE prod1_input 
 
 
 ;-----------------------------
@@ -75,11 +107,37 @@ more_than_one:
 
 ;input: product 2
 prod2_input:
-XOR AX,AX
-MOV AL,N
-LEA BX,ITEMS[2]
 LEA DX,ASK_ITEM_2
-CALL askItem
+MOV AH,09h
+INT 21h
+;ask first char
+MOV AH,1
+INT 21h
+SUB AL,48
+MOV DL,AL
+;ask second char
+INT 21h
+CMP AL,13 ;if CR
+JE prod2_end
+SUB AL,48
+MOV CL,AL
+MOV AL,DL
+MOV BL,10
+MUL BL
+ADD AX,CX
+MOV DL,AL 
+prod2_end:
+MOV byte ptr ITEMS[2],DL ;save prod1
+MOV AH,2
+MOV DL,0Ah 
+INT 21h
+MOV DL,0Dh
+INT 21h
+;check in range
+MOV AL,byte ptr ITEMS[2]
+MOV BL,N ;(max index N-1)
+CMP AL,BL
+JAE prod2_input 
 
 ;order the two product by ID (descending)
 MOV AL,byte ptr ITEMS[0]
@@ -155,16 +213,14 @@ end_programm:
 .EXIT
 
 ;putpose: ask for item product ID and checks correctness
-;input:  AX = max value , BX = pointer to store variable 
-;        DX = pointer to string to print
-;output: N/A (store into a global variable pointed by BX the input)
+;input: AX = max value , BX = pointer to store variable 
+;       DX = pointer to string to print
+;output: N/A (store into global variable the input pointed by BX)
 askItem PROC
 PUSH AX
 PUSH BX
 PUSH CX
 PUSH DX
-
-XOR CX,CX
 
 prod_input:
 PUSH AX ;max value
@@ -178,7 +234,6 @@ MOV AH,1
 INT 21h
 SUB AL,48
 MOV DL,AL
-PUSH BX
 ;ask second char
 INT 21h
 CMP AL,13 ;if CR
@@ -191,8 +246,7 @@ MUL BL
 ADD AX,CX
 MOV DX,AX 
 prod_end:
-POP BX
-MOV [BX],DX ;save prod1
+MOV BX[0],DX ;save prod1
 MOV AH,2
 MOV DL,0Ah 
 INT 21h
@@ -200,7 +254,7 @@ MOV DL,0Dh
 INT 21h
 POP DX ;retrieve string pointer
 ;check in range
-MOV CX,[BX]
+MOV CX,BX[0]
 POP AX ;max value in CX 
 CMP CX,AX
 JAE prod_input
@@ -215,7 +269,7 @@ askItem ENDP
 
 ;purpose: print the price and total discount   
 ;parameters passed by register
-;input:  DX = total price, CX = discount
+;input: DX = total price, CX = discount
 ;output: N/A
 printPrice PROC
 PUSH AX
@@ -292,7 +346,7 @@ RET
 printPrice ENDP
 
 ;purpose: trasform integer number into ascii string
-;input:  AX = integer number 16 bit
+;input: AX = integer number 16 bit
 ;output: OUTSTR = ascii string of the number
 toAscii PROC
 PUSH AX
