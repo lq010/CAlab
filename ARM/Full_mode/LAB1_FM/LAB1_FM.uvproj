@@ -30,7 +30,6 @@
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
           <SFDFile></SFDFile>
-          <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
           <IncludePath></IncludePath>
@@ -45,7 +44,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\</OutputDirectory>
-          <OutputName>sample</OutputName>
+          <OutputName>LAB1_FM</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -62,8 +61,6 @@
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
-            <nStopU1X>0</nStopU1X>
-            <nStopU2X>0</nStopU2X>
           </BeforeCompile>
           <BeforeMake>
             <RunUserProg1>0</RunUserProg1>
@@ -98,7 +95,6 @@
           <StopOnExitCode>3</StopOnExitCode>
           <CustomArgument></CustomArgument>
           <IncludeLibraryModules></IncludeLibraryModules>
-          <ComprImg>1</ComprImg>
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
@@ -119,7 +115,7 @@
             <Oh166RecLen>16</Oh166RecLen>
           </OPTHX>
           <Simulator>
-            <UseSimulator>0</UseSimulator>
+            <UseSimulator>1</UseSimulator>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
             <RunToMain>1</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
@@ -128,20 +124,16 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
-            <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
-            <UseTarget>1</UseTarget>
+            <UseTarget>0</UseTarget>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>1</RunToMain>
+            <RunToMain>0</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
             <RestoreWatchpoints>1</RestoreWatchpoints>
             <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
             <RestoreFunctions>0</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
-            <RestoreTracepoints>0</RestoreTracepoints>
-            <RestoreSysVw>1</RestoreSysVw>
-            <UsePdscDebugDescription>0</UsePdscDebugDescription>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
           <TargetSelection>1</TargetSelection>
@@ -158,7 +150,7 @@
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
             <InitializationFile></InitializationFile>
-            <Driver>BIN\UL2CM3.DLL</Driver>
+            <Driver>BIN\AGDIRDI.DLL</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -167,17 +159,12 @@
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
-            <Capability>1</Capability>
-            <DriverSelection>4096</DriverSelection>
+            <Capability>0</Capability>
+            <DriverSelection>-1</DriverSelection>
           </Flash1>
-          <bUseTDR>0</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
-          <pFcarmOut></pFcarmOut>
-          <pFcarmGrp></pFcarmGrp>
-          <pFcArmRoot></pFcArmRoot>
-          <FcArmLst>0</FcArmLst>
         </Utilities>
         <TargetArmAds>
           <ArmAdsMisc>
@@ -355,9 +342,6 @@
             <Rwpi>0</Rwpi>
             <wLevel>0</wLevel>
             <uThumb>0</uThumb>
-            <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
-            <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -373,8 +357,6 @@
             <SplitLS>0</SplitLS>
             <SwStkChk>0</SwStkChk>
             <NoWarn>0</NoWarn>
-            <uSurpInc>0</uSurpInc>
-            <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -383,7 +365,7 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>1</umfTarg>
+            <umfTarg>0</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
@@ -391,8 +373,7 @@
             <useFile>0</useFile>
             <TextAddressRange>0x00000000</TextAddressRange>
             <DataAddressRange>0x10000000</DataAddressRange>
-            <pXoBase></pXoBase>
-            <ScatterFile>sample.sct</ScatterFile>
+            <ScatterFile></ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -403,27 +384,7 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>startup_file</GroupName>
-          <Files>
-            <File>
-              <FileName>startup_LPC17xx.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\startup_LPC17xx.s</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>main</GroupName>
-          <Files>
-            <File>
-              <FileName>sample.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\sample.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>lib_SoC_board</GroupName>
+          <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
               <FileName>core_cm3.c</FileName>
@@ -431,74 +392,19 @@
               <FilePath>.\core_cm3.c</FilePath>
             </File>
             <File>
+              <FileName>sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\sample.c</FilePath>
+            </File>
+            <File>
               <FileName>system_LPC17xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\system_LPC17xx.c</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>led</GroupName>
-          <Files>
             <File>
-              <FileName>funct_led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\led\funct_led.c</FilePath>
-            </File>
-            <File>
-              <FileName>lib_led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\led\lib_led.c</FilePath>
-            </File>
-            <File>
-              <FileName>led.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\led\led.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>button_EINT</GroupName>
-          <Files>
-            <File>
-              <FileName>button.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\button_EXINT\button.h</FilePath>
-            </File>
-            <File>
-              <FileName>IRQ_button.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\button_EXINT\IRQ_button.c</FilePath>
-            </File>
-            <File>
-              <FileName>lib_button.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\button_EXINT\lib_button.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>timer</GroupName>
-          <Files>
-            <File>
-              <FileName>funct_timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\timer\funct_timer.c</FilePath>
-            </File>
-            <File>
-              <FileName>IRQ_timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\timer\IRQ_timer.c</FilePath>
-            </File>
-            <File>
-              <FileName>lib_timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\timer\lib_timer.c</FilePath>
-            </File>
-            <File>
-              <FileName>timer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\timer\timer.h</FilePath>
+              <FileName>startup_LPC17xx.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\startup_LPC17xx.s</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,0 +1,73 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\Politecnico\Specialistica\Computer Architecture\Laboratories\CAlab\ARM\Full_mode\LAB1_FM\LAB1_FM.uvproj
+Project File Date:  02/01/2018
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling startup_LPC17xx.s...
+linking...
+LAB1_FM.axf: Error: L6218E: Undefined symbol SytemInit (referred from startup_lpc17xx.o).
+Target not created
+Build target 'Target 1'
+assembling startup_LPC17xx.s...
+linking...
+Program Size: Code=980 RO-data=404 RW-data=4 ZI-data=612  
+"LAB1_FM.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling startup_LPC17xx.s...
+linking...
+Program Size: Code=980 RO-data=404 RW-data=4 ZI-data=612  
+"LAB1_FM.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling startup_LPC17xx.s...
+linking...
+Program Size: Code=1076 RO-data=308 RW-data=4 ZI-data=612  
+"LAB1_FM.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling sample.c...
+assembling startup_LPC17xx.s...
+linking...
+Program Size: Code=1148 RO-data=236 RW-data=4 ZI-data=612  
+"LAB1_FM.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling startup_LPC17xx.s...
+startup_LPC17xx.s(219): error: A1163E: Unknown opcode sequence , expecting opcode or Macro
+startup_LPC17xx.s:   219 000000b4     sequence DCD -3,-2,-1,2,3,5,10,15 ;increasing
+startup_LPC17xx.s:                    ^
+startup_LPC17xx.s: 1 Error, 0 Warnings
+Target not created
+Build target 'Target 1'
+assembling startup_LPC17xx.s...
+startup_LPC17xx.s(242): error: A1516E: Bad symbol 'mean', not defined or external
+startup_LPC17xx.s:   242 00000100     LDR R0,=mean
+startup_LPC17xx.s:                            ^
+startup_LPC17xx.s(279): error: A1516E: Bad symbol 'max_differ', not defined or external
+startup_LPC17xx.s:   279 00000156      LDR R0,=max_differ
+startup_LPC17xx.s:                             ^
+startup_LPC17xx.s(301): error: A1516E: Bad symbol 'max_value', not defined or external
+startup_LPC17xx.s:   301 00000186      LDR R0,=max_value
+startup_LPC17xx.s:                             ^
+startup_LPC17xx.s(303): error: A1516E: Bad symbol 'min_value', not defined or external
+startup_LPC17xx.s:   303 0000018a      LDR R0,=min_value
+startup_LPC17xx.s:                             ^
+startup_LPC17xx.s: 4 Errors, 0 Warnings
+Target not created
+Build target 'Target 1'
+assembling startup_LPC17xx.s...
+linking...
+Program Size: Code=1388 RO-data=460 RW-data=4 ZI-data=628  
+"LAB1_FM.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling startup_LPC17xx.s...
+linking...
+Program Size: Code=1388 RO-data=460 RW-data=4 ZI-data=628  
+"LAB1_FM.axf" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling startup_LPC17xx.s...
+linking...
+Program Size: Code=1388 RO-data=460 RW-data=4 ZI-data=628  
+"LAB1_FM.axf" - 0 Error(s), 0 Warning(s).
